@@ -1,9 +1,6 @@
-console.log("✅ todoController loaded");
 const supaBase=require('../Config/supaBaseClient')
 exports.getTodos = async (req, res) => {
-   console.log("getTodos endpoint hit");
   const { data, error } = await supaBase.from('Todos').select('*');
-  console.log("this is data",data);
   if (error) return res.status(500).json({ error });
   res.json(data);
 };

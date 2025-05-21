@@ -1,4 +1,6 @@
 const supaBase =require('../Config/supaBaseClient')
+const {summarizeTodos}=require('../Services/llmService')
+const {sendToSlack}=require('../Services/slackService')
 
 exports.summarizeAndSend = async (req, res) => {
   try {
@@ -18,7 +20,8 @@ exports.summarizeAndSend = async (req, res) => {
       return res.status(400).json({ error: 'No pending todos to summarize' });
     }
 
-    const summary = await summarizeTodos(todos); // <- this line crashes if todos is null
+    const summary = await summarizeTodos(todos);
+    console.log("this is summary frpm openAi",summary)
     await sendToSlack(summary);
     res.json({ message: 'Summary sent to Slack' });
   } catch (error) {
