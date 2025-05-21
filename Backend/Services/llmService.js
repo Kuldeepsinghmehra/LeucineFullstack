@@ -1,10 +1,12 @@
 exports.summarizeTodos = async (todos) => {
   if (!Array.isArray(todos) || todos.length === 0) {
-    throw new Error('No todos to summarize');
+    console.error('Invalid todos input:', todos);
+    throw new Error('No valid todos provided for summarization');
   }
 
   const todoText = todos.map((t, i) => `${i + 1}. ${t.Title}`).join('\n');
-
+  console.log('Todo text for LLM:', todoText);
+  
   const response = await axios.post(
     'https://api.openai.com/v1/chat/completions',
     {
