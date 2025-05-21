@@ -5,11 +5,6 @@ const {sendToSlack}=require('../Services/slackService')
 exports.summarizeAndSend = async (req, res) => {
   try {
     const { data: todos, error } = await supaBase.from('Todos').select('*');
-    
-    console.log('--- DEBUG ---');
-    console.log('Fetched todos:', todos);
-    console.log('Supabase error:', error);
-    console.log('--- END DEBUG ---');
 
     if (error) {
       console.error('Supabase fetch error:', error);

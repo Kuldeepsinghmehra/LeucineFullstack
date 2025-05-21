@@ -8,12 +8,12 @@ const Home = () => {
   const [todos, setTodos] = useState([]);
   const [banner, setBanner] = useState(null);
 
-  // Modal editing state
+
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingTodo, setEditingTodo] = useState(null);
   const [editTitle, setEditTitle] = useState('');
 
-  // Fetch todos from API
+
   const fetchTodos = async () => {
     try {
       const res = await api.get('/todos');
@@ -24,7 +24,7 @@ const Home = () => {
     }
   };
 
-  // Add new todo
+
   const addTodo = async (title) => {
     try {
       await api.post('/todos', { Title: title });
@@ -35,7 +35,7 @@ const Home = () => {
     }
   };
 
-  // Delete todo
+
   const deleteTodo = async (id) => {
     try {
       await api.delete(`/todos/${id}`);
@@ -46,23 +46,23 @@ const Home = () => {
     }
   };
 
-  // Open edit modal with todo
+
   const startEditing = (todo) => {
     setEditingTodo(todo);
     setEditTitle(todo.Title);
     setIsEditModalOpen(true);
   };
 
-  // Cancel edit modal
+
   const cancelEditing = () => {
     setIsEditModalOpen(false);
     setEditingTodo(null);
     setEditTitle('');
   };
 
-  // Save edited todo
+
   const saveEdit = async () => {
-    if (!editTitle.trim()) return; // Avoid empty title
+    if (!editTitle.trim()) return; 
 
     try {
       await api.put(`/todos/${editingTodo.Id}`, { Title: editTitle, Completed: false });
@@ -76,7 +76,7 @@ const Home = () => {
     }
   };
 
-  // Summarize todos (dummy example)
+  
   const summarizeTodos = async () => {
     try {
       await api.post('/summarize');
