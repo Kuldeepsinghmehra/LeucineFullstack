@@ -6,10 +6,10 @@ exports.getTodos = async (req, res) => {
 };
 
 exports.addTodo = async (req, res) => {
-  const { title } = req.body; 
+  const { Title } = req.body; 
   const { data, error } = await supaBase
     .from('Todos') 
-    .insert([{ "Title": title, "Completed": false }]) 
+    .insert([{ "Title": Title, "Completed": false }]) 
     .select();
 
   if (error) return res.status(500).json({ error });
